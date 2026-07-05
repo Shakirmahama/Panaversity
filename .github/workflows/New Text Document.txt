@@ -1,0 +1,38 @@
+name: Deploy Projects
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        working-directory: Assignment No 1/snake-game
+        run: npm install
+
+      - name: Build Snake Game
+        working-directory: Assignment No 1/snake-game
+        run: npm run build
+
+      - name: Copy build
+        run: |
+          mkdir -p docs/snake-game
+          cp -r "Assignment No 1/snake-game/dist/"* docs/snake-game/
+
+      - name: Commit docs
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Deploy Snake Game
