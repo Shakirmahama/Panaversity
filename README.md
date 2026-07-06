@@ -54,19 +54,12 @@ Inside this repository, you will find:
 
 \---
 
+## 🛠️ Tech Stack & Tools
 
-
-\## 🛠️ Tech Stack \& Tools
-
-\*(Tip: Customize this section with the actual languages/frameworks you are learning, e.g., TypeScript, Next.js, Python, etc.)\*
-
-\*   \*\*Language:\*\* \[e.g., TypeScript / JavaScript]
-
-\*   \*\*Environment:\*\* Node.js
-
-\*   \*\*Version Control:\*\* Git \& GitHub
-
-
+* **Language:** JavaScript
+* **Framework:** React
+* **Environment:** Node.js
+* **Version Control:** Git & GitHub
 
 \---
 
