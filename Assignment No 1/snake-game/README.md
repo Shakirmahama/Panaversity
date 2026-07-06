@@ -1,4 +1,4 @@
-# 🐍 Snake Game
+# 🐍 Snake Game (Click here to play the Game: https://shakirmahama.github.io/Panaversity/snake-game/)
 
 A Snake Game built with **React** to learn game development concepts through AI-assisted coding.
 
