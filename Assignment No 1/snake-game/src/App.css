@@ -1,0 +1,495 @@
+/* ==================================================
+   DESIGN TOKENS
+   Palette   — ink #0A0A0B, surface #141416, hairline #232327,
+               paper #F2F0EA, dim #6B6B70, sage #7FA88E, sand #D9C89A, clay #C1755F
+   Type      — display: 'Space Grotesk', body/UI: 'Inter', data: 'JetBrains Mono'
+================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a0a0b;
+  color: #f2f0ea;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+/* ==================================================
+   HOME SCREEN
+================================================== */
+
+.home-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2rem;
+}
+
+.home-screen h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.25rem, 5.5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.home-screen h2 {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #6b6b70;
+  letter-spacing: 0.02em;
+}
+
+/* ==================================================
+   DIFFICULTY BUTTONS
+================================================== */
+
+.difficulty-options {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.difficulty-options input {
+  display: none;
+}
+
+.difficulty-options label {
+  padding: 12px 24px;
+  border: 1px solid #232327;
+  border-radius: 8px;
+  background: transparent;
+  color: #8a8a8f;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.difficulty-options label:hover {
+  border-color: #7fa88e;
+  color: #f2f0ea;
+}
+
+.selected {
+  background: #7fa88e;
+  color: #0a0a0b !important;
+  border-color: #7fa88e !important;
+}
+
+/* ==================================================
+   START BUTTON
+================================================== */
+
+.home-screen button {
+  width: 200px;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background: #7fa88e;
+  color: #0a0a0b;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.home-screen button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.home-screen button:active {
+  transform: scale(0.97);
+}
+
+/* ==================================================
+   GAME SCREEN
+================================================== */
+
+.game-screen {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+}
+
+/* ==================================================
+   TITLE
+================================================== */
+
+.game-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ==================================================
+   SCORE + DIFFICULTY
+   No boxed cards — a single hairline divider separates
+   data from board, numbers carry the weight instead.
+================================================== */
+
+.game-info {
+  width: min(90vw, 55dvh, 550px);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid #232327;
+}
+
+.score-card,
+.difficulty-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.difficulty-card {
+  align-items: flex-end;
+}
+
+.score-card span,
+.difficulty-card span {
+  color: #6b6b70;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.score-card h2,
+.difficulty-card h2 {
+  font-family: 'JetBrains Mono', monospace;
+  color: #d9c89a;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+/* ==================================================
+   GAME BOARD
+================================================== */
+
+.game-board {
+  width: min(90vw, 55dvh, 550px);
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  background: #141416;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ==================================================
+   CELLS
+================================================== */
+
+.cell {
+  border: 0.5px solid #1c1c1f;
+}
+
+/* ==================================================
+   SNAKE
+================================================== */
+
+.snake-head {
+  background: #a8c9b3;
+}
+
+.snake-body {
+  background: #7fa88e;
+}
+
+.snake-tail {
+  background: #5f8871;
+}
+
+/* ==================================================
+   FOOD
+================================================== */
+
+.food {
+  background: #c1755f;
+  border-radius: 50%;
+  margin: 2px;
+}
+
+/* ==================================================
+   CONTROLLER
+================================================== */
+
+.controller {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    ". up ."
+    "left down right";
+  gap: 10px;
+}
+
+.controller button {
+  width: clamp(48px, 8.5vw, 58px);
+  height: clamp(48px, 8.5vw, 58px);
+  border: 1px solid #232327;
+  border-radius: 10px;
+  background: #141416;
+  color: #f2f0ea;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.controller button:hover {
+  border-color: #7fa88e;
+  background: #1a1f1c;
+}
+
+.controller button:active {
+  transform: scale(0.95);
+}
+
+.controller button:nth-child(1) {
+  grid-area: up;
+}
+
+.controller div {
+  display: contents;
+}
+
+.controller div button:nth-child(1) {
+  grid-area: left;
+}
+
+.controller div button:nth-child(2) {
+  grid-area: right;
+}
+
+.controller > button:last-child {
+  grid-area: down;
+}
+
+/* ==================================================
+   GAME OVER
+================================================== */
+
+.game-over {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #c1755f;
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* ==================================================
+   PLAY AGAIN
+================================================== */
+
+.play-again {
+  width: 200px;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background: #7fa88e;
+  color: #0a0a0b;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.play-again:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.play-again:active {
+  transform: scale(0.97);
+}
+
+/* ==================================================
+   GAME OVER MODAL
+================================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(10, 10, 11, 0.72);
+  backdrop-filter: blur(4px);
+
+  padding: 1.5rem;
+  z-index: 10;
+}
+
+.modal-card {
+  width: min(90vw, 320px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+
+  background: #141416;
+  border: 1px solid #232327;
+  border-radius: 14px;
+
+  padding: 2rem 1.75rem;
+
+  text-align: center;
+}
+
+.modal-eyebrow {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #c1755f;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  margin-bottom: 0.75rem;
+}
+
+.modal-score {
+  font-family: 'JetBrains Mono', monospace;
+  color: #d9c89a;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.modal-score-label {
+  color: #6b6b70;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  margin-bottom: 1.25rem;
+}
+
+.modal-difficulty {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.85rem 0;
+  border-top: 1px solid #232327;
+  border-bottom: 1px solid #232327;
+
+  margin-bottom: 1.5rem;
+}
+
+.modal-difficulty span:first-child {
+  color: #6b6b70;
+  font-size: 0.8rem;
+}
+
+.modal-difficulty-value {
+  font-family: 'JetBrains Mono', monospace;
+  color: #f2f0ea;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.modal-card .play-again {
+  width: 100%;
+}
+
+.modal-actions {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.back-home {
+  width: 100%;
+
+  padding: 12px;
+
+  border: 1px solid #232327;
+  border-radius: 8px;
+
+  background: transparent;
+  color: #8a8a8f;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+
+  cursor: pointer;
+
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.back-home:hover {
+  border-color: #7fa88e;
+  color: #f2f0ea;
+}
+
+.back-home:active {
+  transform: scale(0.97);
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 600px) {
+  .game-info {
+    flex-direction: row;
+  }
+
+  .difficulty-options {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .difficulty-options label {
+    width: 200px;
+    text-align: center;
+  }
+
+  .home-screen button,
+  .play-again {
+    width: 200px;
+  }
+}
+
+/* ==================================================
+   ACCESSIBILITY
+================================================== */
+
+button:focus-visible,
+label:focus-within {
+  outline: 2px solid #7fa88e;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
