@@ -1,38 +1,55 @@
 name: Deploy Projects
-
 on:
   push:
     branches:
       - main
-
 permissions:
   contents: write
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-
-      - name: Install dependencies
+      # -----------------------
+      # Build Snake Game
+      # -----------------------
+      - name: Install Snake Game Dependencies
         working-directory: Assignment No 1/snake-game
         run: npm install
-
       - name: Build Snake Game
         working-directory: Assignment No 1/snake-game
         run: npm run build
-
-      - name: Copy build
+      - name: Copy Snake Game
         run: |
           mkdir -p docs/snake-game
           cp -r "Assignment No 1/snake-game/dist/"* docs/snake-game/
-
+      # -----------------------
+      # Build Expense Tracker
+      # -----------------------
+      - name: Install Expense Tracker Dependencies
+        working-directory: Assignment No 2/Expenses-tracker
+        run: npm install
+      - name: Build Expense Tracker
+        working-directory: Assignment No 2/Expenses-tracker
+        run: npm run build
+      - name: Copy Expense Tracker
+        run: |
+          mkdir -p docs/Expenses-tracker
+          cp -r "Assignment No 2/Expenses-tracker/dist/"* docs/Expenses-tracker/
+      # -----------------------
+      # Copy Portfolio (Assignment No 3)
+      # -----------------------
+      - name: Copy Portfolio
+        run: |
+          mkdir -p docs/portfolio
+          cp -r "Assignment No 3/Portfolio/"* docs/Portfolio/
+      # -----------------------
+      # Commit docs
+      # -----------------------
       - name: Commit docs
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Deploy Snake Game
+          commit_message: Deploy Projects
