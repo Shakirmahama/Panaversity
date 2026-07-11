@@ -42,9 +42,9 @@ jobs:
       # -----------------------
       # Copy Portfolio (Assignment No 3)
       # -----------------------
-      - name: Copy Portfolio
+      - name: Portfolio
         run: |
-          mkdir -p docs/portfolio
+          mkdir -p docs/Portfolio
           cp -r "Assignment No 3/Portfolio/"* docs/Portfolio/
       # -----------------------
       # Commit docs
